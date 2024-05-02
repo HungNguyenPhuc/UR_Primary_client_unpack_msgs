@@ -1,0 +1,9 @@
+def myFun():
+  while (True):
+
+    set_digital_out(1, False)
+    set_digital_out(2, False)
+    set_digital_out(2, False)
+  end
+end
+myFun()
