@@ -1,0 +1,37 @@
+sec myFun():
+global p1 = get_actual_tcp_pose()# vị trí hiện tại của TCP trong hệ tọa độ Base
+global user_plane = p[0.285, -0.531, 0.259, -1.226, 2.828, 0.032]# tọa độ của user coordinate
+global p2 = pose_trans(pose_inv(user_plane), p1)# chuyển vị trí hiện tại của TCP trong hệ tọa độ Base sang User coordinate
+modbus_add_signal("127.0.0.1", 255, 128, 3, "X")# Tạo 1 thanh ghi modbus lưu giá trị X
+modbus_add_signal("127.0.0.1", 255, 129, 3, "Y")# Tạo 1 thanh ghi modbus lưu giá trị Y
+modbus_add_signal("127.0.0.1", 255, 130, 3, "Z")# Tạo 1 thanh ghi modbus lưu giá trị Z
+write_port_register(128, floor(p2[0] * 1000))# Ghi giá trị X vào thanh ghi
+write_port_register(129, floor(p2[1] * 1000))# Ghi giá trị Y vào thanh ghi
+write_port_register(130, floor(p2[1] * 1000))# Ghi giá trị Z vào thanh ghi
+end
+def socket_send():
+  a = socket_open("192.168.1.90", 41234, "socket_0")
+  while not a:
+    a = socket_open("192.168.1.90", 41234, "socket_0")
+    sleep(1)
+  end
+  while True:
+    global p1 = get_actual_tcp_pose()# vị trí hiện tại của TCP trong hệ tọa độ Base
+    global user_plane = p[0.285, -0.531, 0.259, -1.226, 2.828, 0.032]# tọa độ của user coordinate
+    global p2 = pose_trans(pose_inv(user_plane), p1)# chuyển vị trí hiện tại của TCP trong hệ tọa độ Base sang User coordinate
+    global send_data = to_str(p2)
+    socket_send_line(send_data, "socket_0")
+    sleep(0.5)
+  end
+end
+def Fun():
+  while (True):
+    set_digital_out(1, True)
+    set_digital_out(2, True)
+    set_digital_out(2, False)
+    set_digital_out(1, False)
+  end
+end
+
+myFun()
+

@@ -1,9 +1,11 @@
 def myFun():
   while (True):
-
+    global var_2 = 0
+    set_digital_out(1, True)
+    set_digital_out(2, True)
+    set_digital_out(2, False)
     set_digital_out(1, False)
-    set_digital_out(2, False)
-    set_digital_out(2, False)
+    global var_1 = pose_trans(p[.2, .5, .1, 1.57, 0, 0], p[.2, .5, .6, 1.57, 0, 0])
   end
 end
 myFun()

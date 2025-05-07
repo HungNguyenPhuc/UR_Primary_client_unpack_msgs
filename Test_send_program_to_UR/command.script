@@ -1,0 +1,16 @@
+def socket_send():
+ a = socket_open("172.16.20.220", 41234, "socket_0") # ip of pc
+ while not a:
+  a = socket_open("172.16.20.220", 41234, "socket_0")
+  sleep(1)
+ end
+ while True:
+  global p1 = get_actual_tcp_pose()
+  global user_plane = p[0.66531,-0.39015,-0.10583,0.008,0.007,0.912];
+  global p2 = pose_trans(pose_inv(user_plane), p1)
+  global send_data = to_str(p2)
+  socket_send_line(send_data, "socket_0")
+  sleep(0.5)
+ end
+end
+socket_send()

@@ -1,20 +1,22 @@
 import socket
 import time
 from Test_extract_robot_message.unpack_robot_msgs import Unpackage
+
 from Test_extract_robot_message.unpack_ur_primary_msg import *
 
-HOST = "192.168.1.120"
-PORT = 30001
+# from Test_extract_robot_message.unpack_msg import unpackege
+
+HOST = "192.168.1.222"
+PORT = 30002
 print("Starting program")
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((HOST, PORT))
 time.sleep(1)
-# f = open("F:/Py program/VSCode/Test_send_program_to_UR/test.script", "rb")
+# f = open("Test_send_program_to_UR/test.script", "rb")
 # l = f.read(4096)
 # print(l)
 # s.sendall(l)
-print("End program")
-
+# print("End program")
 
 # dataHEX = data.hex()
 # totalsize = dataHEX[0:8]
@@ -39,9 +41,10 @@ while True:
 
     #     print(unpack.ROBOT_MODE_DATA.isProgramRunning)
     #     print(unpack.JOINT_DATA.q_actual)
+
     #     # t = unpack.RobotModeData.
     #     # print("timestamp=", t)
-    # elif unpack.type == 20:
+    # if unpack.type == 20:
     #     print(unpack.source_data)
     #     print(unpack.VERSION_MESSAGE.projectNameSize)
     #     print(unpack.VERSION_MESSAGE.projectName)
@@ -50,7 +53,7 @@ while True:
     #     print(unpack.VERSION_MESSAGE.bugfixVersion)
     #     print(unpack.VERSION_MESSAGE.buildNumber)
     #     print(unpack.VERSION_MESSAGE.buildDate)
-    #     break
+    # break
     # elif unpack.type == 25:
 
     # if unpack.type == 16:
@@ -86,20 +89,31 @@ while True:
     #     e = unpack.VERSION_MESSAGE.buildNumber
     #     f = unpack.VERSION_MESSAGE.buildDate
     if unpack.type == 16:
-        print("=============================================")
-        print(unpack.ROBOT_MODE_DATA)
-        print("=============================================")
-        print(unpack.JOINT_DATA)
+        # print("=============================================")
+        # print(unpack.ROBOT_MODE_DATA)
+        # print("=============================================")
+        # print(unpack.JOINT_DATA)
         print("=============================================")
         print(unpack.CARTESIAN_INFO)
+        # print("=============================================")
+        # print(unpack.TOOL_DATA)
+        # print("=============================================")
+        # # print(unpack.KINEMATICS_INFO)
+        # print("=============================================")
+        # print(unpack.MASTERBOARD_DATA)
         print("=============================================")
-        print(unpack.TOOL_DATA)
+        print(unpack.FORCE_MODE_DATA)
+
+    time.sleep(0.115)
+    if unpack.type == 25:
         print("=============================================")
-        print(unpack.KINEMATICS_INFO)
+        print(unpack.GLOBAL_VARIABLES_SETUP_MESSAGE)
         print("=============================================")
-        print(unpack.MASTERBOARD_DATA)
+        print(unpack.GLOBAL_VARIABLES_UPDATE_MESSAGE)
         print("=============================================")
-        print(unpack.Forcemodedata)
+        print(unpack.VAR_MESSAGE)
+        print("=============================================")
+        break
     time.sleep(0.115)
     # print(unpack.get_package_length(data))
     # print(unpack.get_subpackage_length(data))
